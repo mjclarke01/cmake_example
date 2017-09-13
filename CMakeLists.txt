@@ -11,7 +11,7 @@ endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${PROJECT_SOURCE_DIR}/cmake_modules")
 
-# Uncomment this if we want to build googletest as part of the overall build
+# Uncomment this if we want to build googletest within the project
 #add_subdirectory(googletest-release-1.8.0)
 add_subdirectory(src)
 add_subdirectory(tests)
