@@ -8,9 +8,7 @@ enable_testing()
 # Else use custom find_package
 find_package(Foo REQUIRED)
 
-set(TEST_FILES unit_test.cpp)
-
-add_executable(MyTest ${TEST_FILES})
+add_executable(MyTest unit_test.cpp)
 
 # Use this if using find_package(GTest REQUIRED)
 #target_link_libraries(MyTest ${GTEST_BOTH_LIBRARIES} ${GMOCK_LIB})
