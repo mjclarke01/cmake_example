@@ -31,5 +31,6 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
                  ${CMAKE_BINARY_DIR}/googletest-build)
 
 
+# Our stuff
 add_subdirectory(src)
 add_subdirectory(tests)

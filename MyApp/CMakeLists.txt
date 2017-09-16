@@ -6,5 +6,7 @@ project(my_app)
 
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${PROJECT_SOURCE_DIR}/cmake_modules")
 
+# Note: if we include a library's source, then we can treat it like it is our library.
+#add_subdirectory(someLibrary)
 add_subdirectory(src)
 add_subdirectory(tests)
