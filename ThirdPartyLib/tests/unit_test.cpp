@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "ThirdPartyLib/third_party_lib.h"
 
 namespace {
   constexpr int f() {return 1;}

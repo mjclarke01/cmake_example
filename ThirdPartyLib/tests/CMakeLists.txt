@@ -7,6 +7,12 @@ add_executable(ThirdPartyTests unit_test.cpp)
 
 target_link_libraries(ThirdPartyTests gtest_main gmock_main)
 
+# Not entirely sure what this does
+target_include_directories(ThirdPartyTests PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
+  $<INSTALL_INTERFACE:include/ThirdPartyLib>
+)
+
 # This line says the compiler must support constexpr.
 # It is possible to put 'cxx_std_11' or 'cxx_std_14'
 target_compile_features(ThirdPartyTests PRIVATE cxx_constexpr)
