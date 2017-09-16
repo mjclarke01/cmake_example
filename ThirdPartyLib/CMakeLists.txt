@@ -5,7 +5,5 @@ project(ThirdPartyLib)
 # See tests/CMakeList.txt for an example.
 #set(CMAKE_CXX_STANDARD 11)
 
-# Uncomment this if we want to build googletest within the project, see 3) in tests/CMakeLists.txt
-#add_subdirectory(googletest-release-1.8.0)
-add_subdirectory(src)
+#add_subdirectory(src)
 add_subdirectory(tests)
