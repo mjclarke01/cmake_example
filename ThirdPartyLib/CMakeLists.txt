@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
-project(ThirdPartyLib)
+project(ThirdPartyLib VERSION 0.1 LANGUAGES CXX)
+
+# BEGIN GTEST
 
 # Google recommend including GTEST as an external project
 if(UNIX)
@@ -30,7 +32,35 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
                  ${CMAKE_BINARY_DIR}/googletest-build)
 
+# END GTEST
 
-# Our stuff
-add_subdirectory(src)
-add_subdirectory(tests)
+
+# Must use GNUInstallDirs to install libraries into correct locations on all platforms.
+include(GNUInstallDirs)
+
+add_library(ThirdPartyLib src/third_party_lib.cpp)
+
+# This line says the compiler must support lambda init captures and constexpr.
+# It is possible to put 'cxx_std_11' or 'cxx_std_14' and so on.
+target_compile_features(ThirdPartyLib PRIVATE cxx_lambda_init_captures cxx_constexpr)
+
+# Not entirely sure what this all does
+target_include_directories(ThirdPartyLib PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
+        $<INSTALL_INTERFACE:include/ThirdPartyLib>
+        )
+
+install(TARGETS ThirdPartyLib EXPORT ThirdPartyLibConfig
+        ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR})  # This is for Windows
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+# Usually testing stuff
+enable_testing()
+
+add_executable(ThirdPartyTests tests/unit_test.cpp)
+
+target_link_libraries(ThirdPartyTests gtest_main gmock_main)
+
+add_test(NAME third_party_tests COMMAND ThirdPartyTests)
