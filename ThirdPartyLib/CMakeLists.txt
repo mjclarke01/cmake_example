@@ -44,22 +44,31 @@ add_library(ThirdPartyLib src/third_party_lib.cpp)
 # It is possible to put 'cxx_std_11' or 'cxx_std_14' and so on.
 target_compile_features(ThirdPartyLib PRIVATE cxx_lambda_init_captures cxx_constexpr)
 
-# Not entirely sure what this all does
+# Specifies the headers used for building the library.
+# BUILD_INTERFACE tells CMake where the headers are for the 'make'.
+# INSTALL_INTERFACE tells CMake where the headers should be installed on a 'make install'.
 target_include_directories(ThirdPartyLib PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
         $<INSTALL_INTERFACE:include/ThirdPartyLib>
         )
 
+# 'make install' to the correct locations (provided by GNUInstallDirs).
 install(TARGETS ThirdPartyLib EXPORT ThirdPartyLibConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR})  # This is for Windows
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
+# Creates and installs the config file which make the project importable.
+install(EXPORT ThirdPartyLibConfig NAMESPACE ThirdPartyLib:: DESTINATION lib/cmake/ThirdPartyLib)
+
 # Usually testing stuff
 enable_testing()
 
 add_executable(ThirdPartyTests tests/unit_test.cpp)
+
+# The compile features might be different for the unit tests
+target_compile_features(ThirdPartyTests PRIVATE cxx_constexpr)
 
 target_link_libraries(ThirdPartyTests gtest_main gmock_main)
 
