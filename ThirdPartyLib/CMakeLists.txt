@@ -30,7 +30,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 # Add googletest directly to the build. This defines
 # the gtest and gtest_main targets.
 add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
-                 ${CMAKE_BINARY_DIR}/googletest-build)
+                 ${CMAKE_BINARY_DIR}/googletest-build EXCLUDE_FROM_ALL)
 
 # END GTEST
 
@@ -39,6 +39,8 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
 include(GNUInstallDirs)
 
 add_library(ThirdPartyLib src/third_party_lib.cpp)
+
+set_target_properties(ThirdPartyLib PROPERTIES VERSION ${PROJECT_VERSION})
 
 # This line says the compiler must support lambda init captures and constexpr.
 # It is possible to put 'cxx_std_11' or 'cxx_std_14' and so on.
