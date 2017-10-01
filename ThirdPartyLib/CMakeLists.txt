@@ -67,6 +67,11 @@ enable_testing()
 
 add_executable(ThirdPartyTests tests/unit_test.cpp)
 
+# Need the includes to build the tests.
+target_include_directories(ThirdPartyTests PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
+        )
+
 # The compile features might be different for the unit tests
 target_compile_features(ThirdPartyTests PRIVATE cxx_constexpr)
 
