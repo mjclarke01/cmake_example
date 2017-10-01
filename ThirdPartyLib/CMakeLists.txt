@@ -29,6 +29,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 # Add googletest directly to the build. This defines
 # the gtest and gtest_main targets.
+# NOTE: I added EXCLUDE_FROM_ALL to stop 'make install' installing gtest as well.
 add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
                  ${CMAKE_BINARY_DIR}/googletest-build EXCLUDE_FROM_ALL)
 
