@@ -21,3 +21,8 @@ script:
   - cd _build
   - cmake .. && make
   - ctest -VV
+  - cd ../../MyApp
+  - mkdir _build
+  - cd _build
+  - cmake .. && make
+  - ctest -VV
