@@ -21,6 +21,7 @@ script:
   - cd _build
   - cmake .. && make
   - ctest -VV
+  - sudo make install
   - cd ../../MyApp
   - mkdir _build
   - cd _build
