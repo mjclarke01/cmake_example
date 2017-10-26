@@ -1,4 +1,4 @@
-# cmake example
+# cmake example [![Travis Status](https://travis-ci.org/mjclarke01/cmake_example.svg?branch=master)](https://travis-ci.org/mjclarke01/cmake_example)
 
 An example of trying to use modern CMake practices.
 
