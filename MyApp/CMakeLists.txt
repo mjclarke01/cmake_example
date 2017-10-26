@@ -26,7 +26,7 @@ find_package(ThirdPartyLib MODULE REQUIRED)
 
 # Find the library - CONFIG indicates the file is in the system, e.g. /usr/local/lib/cmake
 # This only works if the library has been 'make install'ed and creates a config file.
-# Our example does, so this work work.
+# Our example does, so this will work if we 'make install' ThirdPartyLib.
 #find_package(ThirdPartyLib CONFIG REQUIRED)
 
 add_executable(MyTest tests/unit_test.cpp)
