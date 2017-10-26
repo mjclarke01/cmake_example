@@ -69,8 +69,8 @@ add_executable(MyTest tests/unit_test.cpp)
 target_compile_features(MyTest PRIVATE cxx_constexpr)
 
 # Don't need these because the find_package sorts all this out
-#target_include_directories(MyTest PUBLIC ${GTEST_INCLUDE_DIRS})
 #target_include_directories(MyTest PUBLIC ${ThirdPartyLib_INCLUDE_DIR})
+#target_include_directories(MyTest PUBLIC ${PCRE_INCLUDE_DIR})
 
 # :: is a trick to stop cmake being too clever.
 # If we don't use :: and mispell one of the library names cmake assumes it is a file rather than a target and is happy.
@@ -83,6 +83,8 @@ target_link_libraries(MyTest
         gtest_main 
         gmock_main
         )
+        
+# If we were really using PCRE then would need to include PCRE_LIBRARIES in the target_link_libraries.
 
 if(UNIX)
     # On unix needs pthread
