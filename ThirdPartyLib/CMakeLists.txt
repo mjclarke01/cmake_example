@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 project(ThirdPartyLib VERSION 0.1 LANGUAGES CXX)
 
-# BEGIN GTEST
+# BEGIN GTEST download
 
 # Google recommend including GTEST as an external project
 if(UNIX)
@@ -33,7 +33,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
                  ${CMAKE_BINARY_DIR}/googletest-build EXCLUDE_FROM_ALL)
 
-# END GTEST
+# END GTEST download
 
 
 # Must use GNUInstallDirs to install libraries into correct locations on all platforms.
