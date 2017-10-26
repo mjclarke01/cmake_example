@@ -80,12 +80,12 @@ target_compile_features(MyTest PRIVATE cxx_constexpr)
 # The :: form of the name is defined in FindFoo.cmake
 target_link_libraries(MyTest
         ThirdPartyLib::ThirdPartyLib
-        ${GTEST_BOTH_LIBRARIES}
-        ${GMOCK_LIB}
+        gtest_main 
+        gmock_main
         )
 
 if(UNIX)
-    # On unix need pthread
+    # On unix needs pthread
     target_link_libraries(MyTest pthread)
 endif(UNIX)
 
