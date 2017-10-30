@@ -3,10 +3,13 @@
 #include <functional>
 
 #include "ThirdPartyLib/third_party_lib.h"
+#include "MyLib/printer.h"
 
 int main() {
   SimpleFormatter formatter;
-  std::cout << formatter.formatString("Hello") << std::endl;
+  Printer printer;
+
+  printer.print(formatter.formatString("Hello"));
 
   return 0;
 }

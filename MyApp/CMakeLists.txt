@@ -19,16 +19,17 @@ target_compile_features(Hello PRIVATE cxx_lambda_init_captures cxx_constexpr)
 #find_package(PCRE REQUIRED)
 
 # Find the library - MODULE indicates the find file is part of this project.
-find_package(ThirdPartyLib MODULE REQUIRED)
+find_package(MyLib MODULE REQUIRED)
 
 # Find the library - CONFIG indicates the file is in the system, e.g. /usr/local/lib/cmake
 # This only works if the library has been 'make install'ed and creates a config file.
 # Our example does, so this will work if we 'make install' ThirdPartyLib.
-#find_package(ThirdPartyLib CONFIG REQUIRED)
+find_package(ThirdPartyLib CONFIG REQUIRED)
 
 # Don't need these because the find_package sorts all this out
-#target_include_directories(MyTest PUBLIC ${ThirdPartyLib_INCLUDE_DIR})
 #target_include_directories(MyTest PUBLIC ${PCRE_INCLUDE_DIR})
+#target_include_directories(MyTest PUBLIC ${MyLib_INCLUDE_DIR})
+#target_include_directories(MyTest PUBLIC ${ThirdPartyLib_INCLUDE_DIR})
 
 # :: is a trick to stop cmake being too clever.
 # If we don't use :: and mispell one of the library names cmake assumes it is a file rather than a target and is happy.
@@ -38,6 +39,7 @@ find_package(ThirdPartyLib MODULE REQUIRED)
 # The :: form of the name is defined in FindFoo.cmake
 target_link_libraries(Hello
         ThirdPartyLib::ThirdPartyLib
+        MyLib::MyLib
         )
 # Note: if we were really using PCRE then would need to include PCRE_LIBRARIES in the target_link_libraries.
 
@@ -46,5 +48,5 @@ if(UNIX)
     target_link_libraries(Hello pthread)
 endif(UNIX)
 
-# All the cmake stuff for tests is separate
+# All the cmake stuff for tests is in a separate directory, just to be a bit different
 add_subdirectory(tests)

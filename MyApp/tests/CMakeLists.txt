@@ -42,6 +42,7 @@ add_executable(MyTest unit_test.cpp)
 # The compile features might be different for the unit tests
 target_compile_features(MyTest PRIVATE cxx_constexpr)
 
+# ThirdPartyLib is defined in the top-level cmake
 target_link_libraries(MyTest
         ThirdPartyLib::ThirdPartyLib
         gtest_main
