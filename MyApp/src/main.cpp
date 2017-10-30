@@ -2,8 +2,11 @@
 #include <string>
 #include <functional>
 
+#include "ThirdPartyLib/third_party_lib.h"
+
 int main() {
-  [out = std::ref(std::cout << "Hello, ")](){ out.get() << "World!" << std::endl; }();
+  SimpleFormatter formatter;
+  std::cout << formatter.formatString("Hello") << std::endl;
 
   return 0;
 }

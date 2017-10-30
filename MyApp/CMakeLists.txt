@@ -1,40 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(my_app)
 
-# BEGIN GTEST download
-
-# Google recommend including GTEST as an external project
-if(UNIX)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++11")
-endif()
-
-# Download and unpack googletest at configure time
-configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
-endif()
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "Build step for googletest failed: ${result}")
-endif()
-
-# Prevent overriding the parent project's compiler/linker
-# settings on Windows
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-
-# Add googletest directly to the build. This defines
-# the gtest and gtest_main targets.
-# NOTE: I added EXCLUDE_FROM_ALL to stop 'make install' installing gtest as well.
-add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
-                 ${CMAKE_BINARY_DIR}/googletest-build EXCLUDE_FROM_ALL)
-
-# END GTEST download
-
 # Don't do this, instead specify what features of C++ 11/14/17 we need (if any) using target_compile_features.
 #set(CMAKE_CXX_STANDARD 11)
 
@@ -49,9 +15,6 @@ add_executable(Hello src/main.cpp)
 # It is possible to put 'cxx_std_11' or 'cxx_std_14' and so on.
 target_compile_features(Hello PRIVATE cxx_lambda_init_captures cxx_constexpr)
 
-# Testing
-enable_testing()
-
 # Find PCRE (or a similar library that has its own cmake config) is installed in /usr/local or similar
 #find_package(PCRE REQUIRED)
 
@@ -63,11 +26,6 @@ find_package(ThirdPartyLib MODULE REQUIRED)
 # Our example does, so this will work if we 'make install' ThirdPartyLib.
 #find_package(ThirdPartyLib CONFIG REQUIRED)
 
-add_executable(MyTest tests/unit_test.cpp)
-
-# The compile features might be different for the unit tests
-target_compile_features(MyTest PRIVATE cxx_constexpr)
-
 # Don't need these because the find_package sorts all this out
 #target_include_directories(MyTest PUBLIC ${ThirdPartyLib_INCLUDE_DIR})
 #target_include_directories(MyTest PUBLIC ${PCRE_INCLUDE_DIR})
@@ -78,17 +36,15 @@ target_compile_features(MyTest PRIVATE cxx_constexpr)
 # :: is invalid in a file name, so cmake will complain if it cannot find the target.
 # For example: try misspelling ThirdPartyLib::ThirdPartyLib.
 # The :: form of the name is defined in FindFoo.cmake
-target_link_libraries(MyTest
+target_link_libraries(Hello
         ThirdPartyLib::ThirdPartyLib
-        gtest_main 
-        gmock_main
         )
-        
-# If we were really using PCRE then would need to include PCRE_LIBRARIES in the target_link_libraries.
+# Note: if we were really using PCRE then would need to include PCRE_LIBRARIES in the target_link_libraries.
 
 if(UNIX)
-    # On unix needs pthread
-    target_link_libraries(MyTest pthread)
+    # On unix include pthread
+    target_link_libraries(Hello pthread)
 endif(UNIX)
 
-add_test(NAME my_test COMMAND MyTest)
+# All the cmake stuff for tests is separate
+add_subdirectory(tests)
