@@ -21,9 +21,12 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 # To build debug
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 
+# Linux
 make
-
 sudo make install
+
+# Win32 command line
+cmake --build .
 ```
 
 ## Building ThirdPartyLib
@@ -41,7 +44,10 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 # To build debug
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 
+# Linux
 make
-
 sudo make install
+
+# Win32 command line
+cmake --build .
 ```
