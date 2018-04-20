@@ -1,3 +1,6 @@
+#ifndef PRINTER_H
+#define PRINTER_H
+
 #include<string>
 
 
@@ -8,3 +11,5 @@ class Printer {
     Printer();
     void print(const std::string& input);
 };
+
+#endif // PRINTER_H

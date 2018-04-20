@@ -78,6 +78,8 @@ target_include_directories(ThirdPartyTests PUBLIC
 # The compile features might be different for the unit tests
 target_compile_features(ThirdPartyTests PRIVATE cxx_constexpr)
 
-target_link_libraries(ThirdPartyTests gtest_main gmock_main)
+# Specify as PRIVATE because these libraries are only used for the tests
+# We don't want them "polluting" any program that includes this library.
+target_link_libraries(ThirdPartyTests PRIVATE gtest_main gmock_main)
 
 add_test(NAME third_party_tests COMMAND ThirdPartyTests)

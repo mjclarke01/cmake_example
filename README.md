@@ -5,6 +5,7 @@ An example of trying to use modern CMake practices, it includes:
 * MyApp - a top-level application that depends on the two libraries
 * MyLib - a simple library that doesn't create a cmake config, so requires extra effort in MyApp
 * ThirdPartyLib - a library that creates a cmake config and, thus, doesn't require extra effort
+* MyHeaderLib - a header-only library that creates a cmake config and, thus, doesn't require extra effort
 
 ## Building MyLib
 
@@ -50,4 +51,18 @@ sudo make install
 
 # Win32 command line
 cmake --build .
+```
+
+## Building MyHeaderLib
+```
+mkdir _build
+cd _build
+
+# Build
+cmake ..
+
+# Linux
+# Call make to generate cmake config
+make
+sudo make install
 ```

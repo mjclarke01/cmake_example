@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
 
-
-
 # Testing
 enable_testing()
 
@@ -11,8 +9,8 @@ add_executable(MyTest unit_test.cpp)
 target_compile_features(MyTest PRIVATE cxx_constexpr)
 
 # ThirdPartyLib is defined in the top-level cmake
-target_link_libraries(MyTest
-        ThirdPartyLib::ThirdPartyLib
+target_link_libraries(MyTest PRIVATE
+        #ThirdPartyLib::ThirdPartyLib
         gtest_main
         gmock_main
         )

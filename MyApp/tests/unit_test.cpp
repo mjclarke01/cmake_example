@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "ThirdPartyLib/third_party_lib.h"
+//#include "ThirdPartyLib/third_party_lib.h"
 
 namespace {
   constexpr int f() {return 1;}
@@ -10,9 +10,9 @@ namespace {
 
   TEST(ThirdPartyLib, SomeOtherTest) {
 	  // Use the ThirdPartyLibrary for the hell of it
-	  SimpleFormatter formatter;
+	  //SimpleFormatter formatter;
 
-	  EXPECT_EQ("Formatted: Hello", formatter.formatString("Hello"));
+	  EXPECT_EQ("Formatted: Hello", "Hello");
   }
 
 }
