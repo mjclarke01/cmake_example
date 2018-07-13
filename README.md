@@ -7,20 +7,20 @@ An example of trying to use modern CMake practices, it includes:
 * ThirdPartyLib - a library that creates a cmake config and, thus, doesn't require extra effort
 * MyHeaderLib - a header-only library that creates a cmake config and, thus, doesn't require extra effort
 
-## Building MyLib
+## Configuring and building MyLib
 
 ```
 mkdir _build
 cd _build
 
-# To build shared
-cmake -DBUILD_SHARED_LIBS:BOOL=ON ..
-
-# To build release
+# To configure for a release build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 
-# To build debug
+# To configure for a debug build
 cmake -DCMAKE_BUILD_TYPE=Debug ..
+
+# To configure for a shared build
+cmake -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE=Debug ..
 
 # Linux
 make
@@ -36,14 +36,14 @@ cmake --build .
 mkdir _build
 cd _build
 
-# To build shared
-cmake -DBUILD_SHARED_LIBS:BOOL=ON ..
-
-# To build release
+# To configure for a release build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 
-# To build debug
+# To configure for a debug build
 cmake -DCMAKE_BUILD_TYPE=Debug ..
+
+# To configure for a shared build
+cmake -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE=Debug ..
 
 # Linux
 make
