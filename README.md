@@ -66,3 +66,6 @@ cmake ..
 make
 sudo make install
 ```
+
+## Notes
+* Not setting the CMake build type doesn't necessarily mean it builds debug - it may build an empty build type (depends on the compiler and linker). It is better to be explicit.
