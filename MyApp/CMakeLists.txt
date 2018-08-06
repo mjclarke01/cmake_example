@@ -50,7 +50,7 @@ add_executable(Hello src/main.cpp)
 target_compile_features(Hello PRIVATE cxx_lambda_init_captures cxx_constexpr)
 
 # If we want to play with the warning levels
-target_compile_options(cr1 PRIVATE -Wall -Wextra)
+target_compile_options(Hello PRIVATE -Wall -Wextra)
 
 # Find PCRE (or a similar library that has its own cmake config) is installed in /usr/local or similar
 #find_package(PCRE REQUIRED)
