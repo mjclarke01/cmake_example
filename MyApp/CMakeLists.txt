@@ -49,6 +49,9 @@ add_executable(Hello src/main.cpp)
 # It is possible to put 'cxx_std_11' or 'cxx_std_14' and so on.
 target_compile_features(Hello PRIVATE cxx_lambda_init_captures cxx_constexpr)
 
+# If we want to play with the warning levels
+target_compile_options(cr1 PRIVATE -Wall -Wextra)
+
 # Find PCRE (or a similar library that has its own cmake config) is installed in /usr/local or similar
 #find_package(PCRE REQUIRED)
 
