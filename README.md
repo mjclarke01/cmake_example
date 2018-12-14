@@ -69,3 +69,4 @@ sudo make install
 
 ## Notes
 * Not setting the CMake build type doesn't necessarily mean it builds debug - it may build an empty build type (depends on the compiler and linker). It is better to be explicit.
+* In terms of libraries, PUBLIC means the everything can access it, PRIVATE means only the library itself can access it and INTERFACE means that everything but the library can access it.
